@@ -1,34 +1,24 @@
 import "./App.css";
 
-function App() {
-  const styleA = {
-    color: "darkred",
-    fontWeight: "bold",
-  };
+import withConditionalCard from "./withConditionalCard";
+import SimpleCard from "./SimpleCard";
 
-  const styleB = {
-    color: "navy",
-    textDecoration: "underline",
-  };
+const ConditionalSimpleCard = withConditionalCard(SimpleCard);
 
-  const isPrimary = true;
+const App = () => (
+  <>
+    <ConditionalSimpleCard
+      title="Active Card"
+      content="This card is active."
+      disabled={true}
+    />
 
-  return (
-    <>
-      <div style={isPrimary ? styleA : styleB}>
-        This text has dynamic styling.
-      </div>
-
-      <span
-        style={{
-          fontSize: isPrimary ? "1.5em" : "1em",
-          opacity: isPrimary ? 1 : 0.5,
-        }}
-      >
-        So does this text.
-      </span>
-    </>
-  );
-}
+    <ConditionalSimpleCard
+      title="Disabled Card"
+      content="This card is disabled."
+      disabled={false}
+    />
+  </>
+);
 
 export default App;
