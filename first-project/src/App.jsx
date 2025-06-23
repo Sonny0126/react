@@ -1,24 +1,14 @@
 import "./App.css";
+import Button from "./Button";
 
-import withConditionalCard from "./withConditionalCard";
-import SimpleCard from "./SimpleCard";
-
-const ConditionalSimpleCard = withConditionalCard(SimpleCard);
-
-const App = () => (
-  <>
-    <ConditionalSimpleCard
-      title="Active Card"
-      content="This card is active."
-      disabled={true}
-    />
-
-    <ConditionalSimpleCard
-      title="Disabled Card"
-      content="This card is disabled."
-      disabled={false}
-    />
-  </>
-);
+function App() {
+  return (
+    <>
+      <Button name={"Home"} />
+      <Button name={"Store"} />
+      <Button name={"Contact"} />
+    </>
+  );
+}
 
 export default App;
