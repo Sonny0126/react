@@ -1,24 +1,32 @@
-function Basic() {
-  const name = "John";
-  const age = 25;
-  const isAdmin = true;
-
-  return (
-    <>
-      <p>Name: {name}</p>
-      <p>Age next year: {age + 1}</p>
-      <p>{name + " 's profile"}</p> {/* nmae 오타 수정 */}
-      <p>{`${name} is ${age} years old`}</p>
-      <p>Admin status: {String(isAdmin)}</p>
-    </>
-  );
-}
+import "./App.css";
 
 function App() {
+  const styleA = {
+    color: "darkred",
+    fontWeight: "bold",
+  };
+
+  const styleB = {
+    color: "navy",
+    textDecoration: "underline",
+  };
+
+  const isPrimary = true;
+
   return (
     <>
-      <h1>JSX</h1>
-      <Basic />
+      <div style={isPrimary ? styleA : styleB}>
+        This text has dynamic styling.
+      </div>
+
+      <span
+        style={{
+          fontSize: isPrimary ? "1.5em" : "1em",
+          opacity: isPrimary ? 1 : 0.5,
+        }}
+      >
+        So does this text.
+      </span>
     </>
   );
 }
