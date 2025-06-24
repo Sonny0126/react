@@ -1,47 +1,34 @@
-import "./App.css";
-import { useState } from "react";
+import './App.css'
+import { useState } from 'react'
+import TempInput from './TempInput'
+import UnitSelector from './UnitSelector'
 
-function App() {
-  const [todos, setTodos] = useState(["Learn React", "Build a project"]);
+const App = () => {
+  const [temperature, setTemperature] = useState("")
+  const [unit, setUnit] = useState("Celsius")
 
-  const [newTodo, setNewTodo] = useState("");
-
-  const addTodo = (newTodo) => {
-    setTodos([...todos, newTodo]);
-    setNewTodo("");
-  };
-  const deleteTodo = (index) => {
-    setTodos(todos.filter((_, i) => i !== index));
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      addTodo(newTodo);
-    }
-  };
+  const convertedTemp = unit === "Celsius"
+    ? (temperature * 9/5 + 32).toFixed(1)
+    : ((temperature - 32) * 5/9).toFixed(1)
 
   return (
-    <>
-      <h3>Todo List</h3>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            {todo}
-            <button onClick={() => deleteTodo(index)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <p>Typing: {newTodo}</p>
-      <input
-        type="text"
-        value={newTodo}
-        onChange={(e) => setNewTodo(e.target.value)}
-        onKeyDown={handleKeyDown}
-        pla
+    <div>
+      <h2>Temperature Converter</h2>
+      <p>
+        Converted: {temperature ? convertedTemp : "--"} 
+        {unit === "Celsius" ? "°F" : "°C"}
+      </p>
+      <TempInput
+        value={temperature}
+        unit={unit}
+        onChange={setTemperature}
       />
-      <button onClick={() => addTodo(newTodo)}>Add New Task</button>
-    </>
-  );
+      <UnitSelector
+        unit={unit}
+        onUnitChange={setUnit}
+      />
+    </div>
+  )
 }
 
-export default App;
+export default App
