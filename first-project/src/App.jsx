@@ -1,45 +1,28 @@
 import "./App.css";
 import { useState } from "react";
+import Profile from "./Profile";
 
 function App() {
-  const [todos, setTodos] = useState(["Learn React", "Build a project"]);
+  const users = ["Alice", "Bob", "Clark"];
+  const [user, setUser] = useState(users[0]);
+  const [status, setstatus] = useState(true);
 
-  const [newTodo, setNewTodo] = useState("");
-
-  const addTodo = (newTodo) => {
-    setTodos([...todos, newTodo]);
-    setNewTodo("");
-  };
-  const deleteTodo = (index) => {
-    setTodos(todos.filter((_, i) => i !== index));
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      addTodo(newTodo);
-    }
-  };
+  console.log("App Rendered");
 
   return (
     <>
-      <h3>Todo List</h3>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            {todo}
-            <button onClick={() => deleteTodo(index)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <p>Typing: {newTodo}</p>
-      <input
-        type="text"
-        value={newTodo}
-        onChange={(e) => setNewTodo(e.target.value)}
-        onKeyDown={handleKeyDown}
-        pla
-      />
-      <button onClick={() => addTodo(newTodo)}>Add New Task</button>
+      <h2>User Profile</h2>
+      <button onClick={() => setstatus(!status)}>Toggle Status</button>
+      <button
+        onClick={() => setUser(users[(users.indexOf(user) + 1) % users.length])}
+      >
+        Switch User
+      </button>
+      <p>
+        <b>{user}</b> | {status ? "Active" : "Inactive"}
+      </p>
+
+      <Profile name={user} />
     </>
   );
 }
