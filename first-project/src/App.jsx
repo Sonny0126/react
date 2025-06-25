@@ -1,24 +1,21 @@
 import './App.css'
-import { useState, useCallback } from 'react'
-import Child from './Child'
+import { CountProvider } from './contexts/CountContext'
+import { ToggleProvider } from './contexts/ToggleContext'
+import Child1 from './Child1'
+import Child3 from './Child3'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [active, setActive] = useState(true)
-
-  const handleClick = useCallback(
-    () => { setCount(c => c + 1) }, [])
-
   return (
     <>
-      <h2>Parent</h2>
-      <button onClick={() => setActive(a => !a)}>
-        Toggle Active
-      </button>
-      <p>Count: {count}</p>
-      <Child active={active} 
-        onClick={handleClick} />
+      <h2>App</h2>
+      <CountProvider>
+        <Child1 />
+      </CountProvider>
+      <ToggleProvider>
+        <Child3 />
+      </ToggleProvider>
     </>
   )
 }
+
 export default App
